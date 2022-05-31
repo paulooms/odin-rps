@@ -1,5 +1,4 @@
-
-let score = [0,0];
+let score = [0, 0];
 // define computer selection
 
 function computerSelection() {
@@ -32,10 +31,10 @@ function playRound(computer, player) {
         computer === "SCISSORS" && player === "PAPER" ||
         computer === "PAPER" && player === "ROCK"
     ) {
-        score[1] ++;
+        score[1]++;
         return "You picked: " + player + "\nComputer picked: " + computer + "\nYou lose!"
     } else {
-        score[0] ++;
+        score[0]++;
         return "You picked: " + player + "\nComputer picked: " + computer + "\nYou win!"
     }
 
@@ -43,21 +42,17 @@ function playRound(computer, player) {
 
 // play 5 rounds of rps
 
-function game(){
-    for (let i = 0; i < 5; i++){
+function game() {
+    for (let i = 0; i < 5; i++) {
         console.log(playRound(computerSelection(), playerSelection()))
         console.log("The score is:\nPlayer: " + score[0] + "\nComputer: " + score[1]);
     }
     console.log("The game is over!")
-    if (score[0] > score [1]){
+    if (score[0] > score[1]) {
         console.log("You win!");
-    }
-
-    else if (score[0] < score[1]){
+    } else if (score[0] < score[1]) {
         console.log("You lose!");
-    }
-
-    else {
+    } else {
         console.log("It's a tie!");
     }
 }
