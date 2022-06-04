@@ -7,11 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Roboto+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+    </style>
 </head>
 <script src="script.js" defer>
 </script>
 
 <body>
+    <div class="main">
+        <div class="container">
+            <div class="scoreboard">
+                <div>YOU</div>
+                <div id="score">0-0</div>
+                <div>CPU</div>
+            </div>
+            <div class="display">
+                <div class="display-player start">YOU</div>
+                <div id="vs">VS</div>
+                <div class="display-cpu start">CPU</div>
+            </div>
+
+            <div class="selection">
+                <p class="challenge">What's your move?</p>
+                <div class="playarea">
+                    <button class="button" id="rock">ROCK</button>
+                    <button class="button" id="paper">PAPER</button>
+                    <button class="button" id="scissors">SCISSORS</button>
+                </div>
+            </div>
+
+            <div class="gamelog">
+                <div id="roundcounter">0 / 5</div>
+                <p>Play history here.</p>
+                <ul id="playhistorylist">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!-- <body>
     <div class="main">
         <div class="maincontainer">
             <div class="container start">
@@ -36,15 +74,15 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 
 
 
-    </div>
-    <div class="popup">
-        <p class="endmessage"></p>
-        <div class="againbuttoncontainer"></div>
-    </div>
+</div>
+<div class="popup">
+    <p class="endmessage"></p>
+    <div class="againbuttoncontainer"></div>
+</div>
 
 </body>
 

@@ -1,19 +1,15 @@
-// x Stop at 5 rounds
-// - Throw result message (use array for history?)
-// - Change style to indicate no more responsive buttons
-
-// - add round play history
-
 let score = [0, 0];
 let roundCounter = 0;
-let playHistory = []; // array of arrays with [playerChoice, computerChoice, roundscore, roundResult]
 
-const buttonContainer = document.querySelector('.buttons')
+// let playHistory = []; // array of arrays with [playerChoice, computerChoice, roundscore, roundResult]
+
+const buttonContainer = document.querySelector('.playarea')
 const buttons = document.querySelectorAll('button');
 const roundCounterDiv = document.querySelector('#roundcounter');
 const scoreDiv = document.querySelector('#score');
-const container = document.querySelector('.container');
-const playArea = document.querySelector('.playarea');
+const displayPlayer = document.querySelector('.display-player');
+const displayCPU = document.querySelector('.display-cpu');
+const playArea = document.querySelector('.display');
 const playHistoryList = document.querySelector('#playhistorylist');
 
 
@@ -43,8 +39,11 @@ function playRound(computer, player) {
     if (computer === player) {
         roundCounter++
 
-        container.classList.add('tie'); // change styling
-        container.classList.remove('start', 'loss', 'win');
+        displayPlayer.classList.add('tie'); // change styling
+        displayPlayer.classList.remove('start', 'loss', 'win');
+
+        displayCPU.classList.add('tie'); // change styling
+        displayCPU.classList.remove('start', 'loss', 'win');
 
         // playHistory.unshift([player, computer, score, "tie"]);
 
@@ -56,7 +55,9 @@ function playRound(computer, player) {
 
         playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
 
-        playArea.textContent = "You picked: " + player + "\nComputer picked: " + computer + "\nIt's a tie"
+        displayPlayer.textContent = `${player}`;
+        displayCPU.textContent = `${computer}`;
+
 
     } else if (
 
@@ -66,8 +67,11 @@ function playRound(computer, player) {
     ) {
         roundCounter++
 
-        container.classList.add('loss'); // change styling
-        container.classList.remove('start', 'tie', 'win');
+        displayPlayer.classList.add('loss'); // change styling
+        displayPlayer.classList.remove('start', 'tie', 'win');
+
+        displayCPU.classList.add('win'); // change styling
+        displayCPU.classList.remove('start', 'loss', 'tie');
 
         const playHistoryListItem = document.createElement('li');
 
@@ -80,11 +84,18 @@ function playRound(computer, player) {
         // playHistory.unshift([player, computer, score, "loss"]);
 
         score[1]++;
-        playArea.textContent = "You picked: " + player + "\nComputer picked: " + computer + "\nYou lose!"
+
+        displayPlayer.textContent = `${player}`;
+        displayCPU.textContent = `${computer}`;
+
+
     } else {
         roundCounter++
-        container.classList.add('win'); // change styling
-        container.classList.remove('start', 'tie', 'loss');
+        displayPlayer.classList.add('win'); // change styling
+        displayPlayer.classList.remove('start', 'tie', 'loss');
+
+        displayCPU.classList.add('loss'); // change styling
+        displayCPU.classList.remove('start', 'tie', 'win');
 
         const playHistoryListItem = document.createElement('li');
 
@@ -97,7 +108,10 @@ function playRound(computer, player) {
         // playHistory.unshift([player, computer, score, "win"]);
 
         score[0]++;
-        playArea.textContent = "You picked: " + player + "\nComputer picked: " + computer + "\nYou win!"
+        displayPlayer.textContent = `${player}`;
+        displayCPU.textContent = `${computer}`;
+
+
     }
 }
 
@@ -139,7 +153,7 @@ buttons.forEach((button) => {
 
         playRound(computer(), answer);
         roundCounterDiv.textContent = `${roundCounter} / 5`;
-        scoreDiv.textContent = `PLAYER ${score[0]} - ${score[1]} COMPUTER`;
+        scoreDiv.textContent = `${score[0]}-${score[1]}`;
         console.log(roundCounter);
 
         if (roundCounter >= 5) {

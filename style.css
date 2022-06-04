@@ -1,53 +1,170 @@
+/* font-family: 'Anton', sans-serif;
+font-family: 'Bangers', cursive;
+font-family: 'Roboto Mono', monospace; */
+
 body,
 html {
     margin: 0;
     padding: 0;
 }
 
-* {
-    box-sizing: border-box;
+button {
+    all: unset;
 }
 
+* {
+    /* box-sizing: border-box; */
+    font-family: 'Anton', sans-serif;
+    color: #242424;
+}
 
 .main {
     display: flex;
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.container {
+    width: 340px;
+    background-color: #FDFF92;
+    border: 1px solid #242424;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.scoreboard,
+.display,
+.playarea,
+.gamelog {
+    margin: 20px;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #F4DEFF;
+    border: 1px solid #242424;
+    border-radius: 10px;
+    width: 70%;
+    height: 40px;
+    margin: 40px auto;
+    padding: 0px 10px;
+    font-size: 1.2em;
+}
+
+#score {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 2rem;
+
+    background-color: #ECC2FF;
+    border-radius: 10px;
+    border: 1px solid #242424;
+    padding: 10px 20px;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.container {
-    min-width: 300px;
-    height: 300px;
+.display-player,
+.display-cpu {
+    height: 130px;
+    width: 100%;
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5em;
+    border: 1px solid #242424;
+}
+
+.display-player {
+    margin-bottom: 20px;
+}
+
+#vs {
+    font-family: 'Bangers', sans-serif;
+    font-size: 5em;
+    color: #F5F864;
+    margin: 0;
+
+    position: absolute;
+
+    -webkit-text-stroke: 2px #242424;
+
+    text-shadow: -5px 5px 0 #242424;
+}
+
+.playarea {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+    background-color: #F4DEFF;
+    width: auto;
+    margin: 0 20px;
+    padding: 20px 10px;
+    border: 1px solid #242424;
+    align-self: normal;
+}
+
+.button {
+    flex: 1 1 100%;
+
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+    background-color: #ECC2FF;
+    padding: 4px;
+    border: 1px solid #242424;
+}
+
+.selection {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
-.maincontainer {
-    display: flex;
-
+.challenge {
+    background-color: #F86E6E;
+    border: 1px solid #242424;
+    margin: 20px;
+    padding: 10px 20px;
 }
 
+.gamelog p,
+.gamelog #roundcounter {
+    font-family: 'Roboto Mono', monospace;
+}
 
+#roundcounter {
+    font-weight: bold;
+}
 
 /* Game stat modifiers */
 
 .start {
-    background-color: lightgray;
+    background-color: #ECF3FB;
 }
 
 .win {
-    background-color: green;
+    background-color: #6EF88D;
 }
 
 .loss {
-    background-color: red;
+    background-color: #F86E6E;
 }
 
 .tie {
-    background-color: gray;
+    background-color: #ECF3FB;
 }
 
 #playhistory {
@@ -58,19 +175,19 @@ html {
 }
 
 .playhistorylistitem {
-    color: black;
+    color: #242424;
 }
 
 .playhistorylistitem .tie {
-    background-color: rgb(184, 183, 185);
+    background-color: #ECF3FB;
 }
 
 .playhistorylistitem .loss {
-    background-color: rgb(226, 43, 43);
+    background-color: #F86E6E;
 }
 
 .playhistorylistitem .win {
-    background-color: rgb(58, 226, 43);
+    background-color: #6EF88D;
 }
 
 
