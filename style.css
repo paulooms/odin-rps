@@ -12,11 +12,7 @@ button {
     all: unset;
 }
 
-* {
-    /* box-sizing: border-box; */
-    font-family: 'Anton', sans-serif;
-    color: #242424;
-}
+
 
 .main {
     display: flex;
@@ -39,6 +35,9 @@ button {
 .playarea,
 .gamelog {
     margin: 20px;
+
+    font-family: 'Anton', sans-serif;
+    color: #242424;
 }
 
 .scoreboard {
@@ -51,7 +50,7 @@ button {
     border-radius: 10px;
     width: 70%;
     height: 40px;
-    margin: 40px auto;
+    margin: 30px auto;
     padding: 0px 10px;
     font-size: 1.2em;
 }
@@ -124,6 +123,16 @@ button {
     background-color: #ECC2FF;
     padding: 4px;
     border: 1px solid #242424;
+    transition: .5s;
+    font-family: 'Anton', sans-serif;
+
+}
+
+.button:hover {
+    background: #D479FF;
+    transform: scale(1.5, 1.5);
+    transition: .1s ease-in;
+    z-index: 1;
 }
 
 .selection {
@@ -134,19 +143,49 @@ button {
 }
 
 .challenge {
-    background-color: #F86E6E;
+    background-color: #C3DCFA;
     border: 1px solid #242424;
-    margin: 20px;
+    margin: 0 20px -10px 20px;
+    z-index: 1;
     padding: 10px 20px;
 }
 
-.gamelog p,
-.gamelog #roundcounter {
+.gamelog {
+    height: 100px;
+    background-color: #ECF3FB;
+    text-decoration: none;
+    overflow: scroll;
+    border: 1px solid #242424;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: 0;
+}
+
+.gamelog li {
     font-family: 'Roboto Mono', monospace;
+    font-size: .8em;
+    padding: 4px 8px 4px 8px;
+    border-bottom: 1px solid #242424;
+
+
+
+}
+
+li::after {
+    border-bottom: 1px solid #242424;
+    width: 80%;
 }
 
 #roundcounter {
+    padding: 2px;
     font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #242424;
+
 }
 
 /* Game stat modifiers */
@@ -192,9 +231,9 @@ button {
 
 
 .popup {
-    height: 100px;
-    width: 100px;
-    background-color: yellow;
+    z-index: 2;
+    min-height: 300px;
+    min-width: 400px;
     visibility: hidden;
     position: fixed;
     left: 50%;
@@ -204,9 +243,17 @@ button {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 
+    border: 1px solid #242424;
+
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.popup p {
+    font-family: 'Anton', sans-serif;
+    font-size: 3em;
 }
 
 .popup.show {

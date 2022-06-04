@@ -11,6 +11,9 @@ const displayPlayer = document.querySelector('.display-player');
 const displayCPU = document.querySelector('.display-cpu');
 const playArea = document.querySelector('.display');
 const playHistoryList = document.querySelector('#playhistorylist');
+const endParagraph = document.querySelector('.endmessage');
+const popup = document.querySelector(".popup");
+
 
 
 function computer() {
@@ -49,7 +52,7 @@ function playRound(computer, player) {
 
         const playHistoryListItem = document.createElement('li');
 
-        playHistoryListItem.textContent = `You picked: ${player}. \nComputer picked: ${computer}.`
+        playHistoryListItem.innerHTML = `You picked: <b>${player}.</b> </br>Computer picked: <b>${computer}.</b></br><i>It's a tie!</i>`
 
         playHistoryListItem.classList.add('playhistorylistitem', 'tie');
 
@@ -75,7 +78,7 @@ function playRound(computer, player) {
 
         const playHistoryListItem = document.createElement('li');
 
-        playHistoryListItem.textContent = `You picked: ${player}. \nComputer picked: ${computer}.`
+        playHistoryListItem.innerHTML = `You picked: <b>${player}.</b> </br>Computer picked: <b>${computer}.</b></br><i>You lost the round!</i>`
 
         playHistoryListItem.classList.add('playhistorylistitem', 'loss');
 
@@ -99,7 +102,7 @@ function playRound(computer, player) {
 
         const playHistoryListItem = document.createElement('li');
 
-        playHistoryListItem.textContent = `You picked: ${player}. \nComputer picked: ${computer}.`
+        playHistoryListItem.innerHTML = `You picked: <b>${player}.</b> </br>Computer picked: <b>${computer}.</b></br><i>You won the round!</i>`
 
         playHistoryListItem.classList.add('playhistorylistitem', 'win');
 
@@ -131,20 +134,28 @@ function gameOver() {
 
 
     })
-    const popup = document.querySelector(".popup");
-    console.log(popup);
-    popup.classList.add('show');
-
-    console.log(score);
 
 
     const restartButton = document.createElement('button')
+    restartButton.classList.add('button');
     restartButton.textContent = 'Play again!';
 
     againButtonContainer.appendChild(restartButton);
     restartButton.addEventListener('click', function () {
         location.reload();
     })
+
+    if (score[0] < score[1]) {
+        endParagraph.textContent = "You lost, bummer!";
+        popup.classList.add('loss', 'show');
+    } else if (score[0] > score[1]) {
+        endParagraph.textContent = "You won, awesome!"
+        popup.classList.add('win', 'show');
+    } else {
+        endParagraph.textContent = "It's a tie. Boring!"
+        popup.classList.add('tie', 'show');
+    }
+
 }
 
 buttons.forEach((button) => {
@@ -152,9 +163,8 @@ buttons.forEach((button) => {
         let answer = button.id.toUpperCase();
 
         playRound(computer(), answer);
-        roundCounterDiv.textContent = `${roundCounter} / 5`;
+        roundCounterDiv.textContent = `Round: ${roundCounter} / 5`;
         scoreDiv.textContent = `${score[0]}-${score[1]}`;
-        console.log(roundCounter);
 
         if (roundCounter >= 5) {
             gameOver();
