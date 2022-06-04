@@ -1,7 +1,22 @@
-let score = [0, 0];
-// define computer selection
+// x Stop at 5 rounds
+// - Throw result message (use array for history?)
+// - Change style to indicate no more responsive buttons
 
-function computerSelection() {
+// - add round play history
+
+let score = [0, 0];
+let roundCounter = 0;
+let playHistory = []; // array of arrays with [playerChoice, computerChoice, roundscore, roundResult]
+
+const buttons = document.querySelectorAll('button');
+const roundCounterDiv = document.querySelector('#roundcounter');
+const scoreDiv = document.querySelector('#score');
+const container = document.querySelector('.container');
+const playArea = document.querySelector('.playarea');
+const playHistoryList = document.querySelector('#playhistorylist');
+
+
+function computer() {
     let choices = ["ROCK", "PAPER", "SCISSORS"];
     return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -25,36 +40,73 @@ function playRound(computer, player) {
     // determine result
 
     if (computer === player) {
-        return "You picked: " + player + "\nComputer picked: " + computer + "\nIt's a tie"
+        roundCounter++
+
+        container.classList.add('tie'); // change styling
+        container.classList.remove('start', 'loss', 'win');
+
+        // playHistory.unshift([player, computer, score, "tie"]);
+
+        const playHistoryListItem = document.createElement('li');
+
+        playHistoryListItem.textContent = `You picked: ${player}. \nComputer picked: ${computer}.`
+
+        playHistoryListItem.classList.add('playhistorylistitem', 'tie');
+
+        playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
+
+        playArea.textContent = "You picked: " + player + "\nComputer picked: " + computer + "\nIt's a tie"
+
     } else if (
+
         computer === "ROCK" && player === "SCISSORS" ||
         computer === "SCISSORS" && player === "PAPER" ||
         computer === "PAPER" && player === "ROCK"
     ) {
+        roundCounter++
+
+        container.classList.add('loss'); // change styling
+        container.classList.remove('start', 'tie', 'win');
+
+        const playHistoryListItem = document.createElement('li');
+
+        playHistoryListItem.textContent = `You picked: ${player}. \nComputer picked: ${computer}.`
+
+        playHistoryListItem.classList.add('playhistorylistitem', 'loss');
+
+        playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
+
+        // playHistory.unshift([player, computer, score, "loss"]);
+
         score[1]++;
-        return "You picked: " + player + "\nComputer picked: " + computer + "\nYou lose!"
+        playArea.textContent = "You picked: " + player + "\nComputer picked: " + computer + "\nYou lose!"
     } else {
+        roundCounter++
+        container.classList.add('win'); // change styling
+        container.classList.remove('start', 'tie', 'loss');
+
+        const playHistoryListItem = document.createElement('li');
+
+        playHistoryListItem.textContent = `You picked: ${player}. \nComputer picked: ${computer}.`
+
+        playHistoryListItem.classList.add('playhistorylistitem', 'win');
+
+        playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
+
+        // playHistory.unshift([player, computer, score, "win"]);
+
         score[0]++;
-        return "You picked: " + player + "\nComputer picked: " + computer + "\nYou win!"
-    }
-
-}
-
-// play 5 rounds of rps
-
-function game() {
-    for (let i = 0; i < 5; i++) {
-        console.log(playRound(computerSelection(), playerSelection()))
-        console.log("The score is:\nPlayer: " + score[0] + "\nComputer: " + score[1]);
-    }
-    console.log("The game is over!")
-    if (score[0] > score[1]) {
-        console.log("You win!");
-    } else if (score[0] < score[1]) {
-        console.log("You lose!");
-    } else {
-        console.log("It's a tie!");
+        playArea.textContent = "You picked: " + player + "\nComputer picked: " + computer + "\nYou win!"
     }
 }
 
-game();
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let answer = button.id.toUpperCase();
+
+        playRound(computer(), answer);
+        roundCounterDiv.textContent = `${roundCounter} / 5`;
+        scoreDiv.textContent = `PLAYER ${score[0]} - ${score[1]} COMPUTER`;
+    })
+})
