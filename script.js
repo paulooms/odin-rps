@@ -103,11 +103,27 @@ function playRound(computer, player) {
 
 const againButtonContainer = document.querySelector('.againbuttoncontainer');
 
+
+
+
 function gameOver() {
+
+
+
+
     buttons.forEach((button) => {
         button.disabled = true;
 
+
+
     })
+    const popup = document.querySelector(".popup");
+    console.log(popup);
+    popup.classList.add('show');
+
+    console.log(score);
+
+
     const restartButton = document.createElement('button')
     restartButton.textContent = 'Play again!';
 
