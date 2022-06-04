@@ -8,6 +8,7 @@ let score = [0, 0];
 let roundCounter = 0;
 let playHistory = []; // array of arrays with [playerChoice, computerChoice, roundscore, roundResult]
 
+const buttonContainer = document.querySelector('.buttons')
 const buttons = document.querySelectorAll('button');
 const roundCounterDiv = document.querySelector('#roundcounter');
 const scoreDiv = document.querySelector('#score');
@@ -100,13 +101,33 @@ function playRound(computer, player) {
     }
 }
 
+const againButtonContainer = document.querySelector('.againbuttoncontainer');
+
+function gameOver() {
+    buttons.forEach((button) => {
+        button.disabled = true;
+
+    })
+    const restartButton = document.createElement('button')
+    restartButton.textContent = 'Play again!';
+
+    againButtonContainer.appendChild(restartButton);
+    restartButton.addEventListener('click', function () {
+        location.reload();
+    })
+}
 
 buttons.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', function () {
         let answer = button.id.toUpperCase();
 
         playRound(computer(), answer);
         roundCounterDiv.textContent = `${roundCounter} / 5`;
         scoreDiv.textContent = `PLAYER ${score[0]} - ${score[1]} COMPUTER`;
+        console.log(roundCounter);
+
+        if (roundCounter >= 5) {
+            gameOver();
+        }
     })
 })
