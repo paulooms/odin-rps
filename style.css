@@ -148,6 +148,8 @@ button {
     margin: 0 20px -10px 20px;
     z-index: 1;
     padding: 10px 20px;
+    font-family: 'Anton', sans-serif;
+
 }
 
 .gamelog {
@@ -185,7 +187,6 @@ li::after {
     font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #242424;
-    font-family: 'Anton', sans-serif;
 
 }
 
