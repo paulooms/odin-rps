@@ -114,7 +114,7 @@ button {
     align-self: normal;
 }
 
-.button {
+button {
     flex: 1 1 100%;
 
     display: flex;
@@ -128,7 +128,11 @@ button {
 
 }
 
-.button:hover {
+.restartButton {
+    flex: 0;
+}
+
+button:hover {
     background: #D479FF;
     transform: scale(1.5, 1.5);
     transition: .1s ease-in;
@@ -206,6 +210,16 @@ li::after {
 
 .tie {
     background-color: #ECF3FB;
+}
+
+
+
+.display-cpu.win {
+    background-color: #F86E6E;
+}
+
+.display-cpu.loss {
+    background-color: #6EF88D;
 }
 
 #playhistory {

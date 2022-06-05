@@ -1,10 +1,8 @@
 let score = [0, 0];
 let roundCounter = 0;
 
-// let playHistory = []; // array of arrays with [playerChoice, computerChoice, roundscore, roundResult]
-
 const buttonContainer = document.querySelector('.playarea')
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.button');
 const roundCounterDiv = document.querySelector('#roundcounter');
 const scoreDiv = document.querySelector('#score');
 const displayPlayer = document.querySelector('.display-player');
@@ -13,134 +11,56 @@ const playArea = document.querySelector('.display');
 const playHistoryList = document.querySelector('#playhistorylist');
 const endParagraph = document.querySelector('.endmessage');
 const popup = document.querySelector(".popup");
-
-
+const againButtonContainer = document.querySelector('.againbuttoncontainer');
 
 function computer() {
     let choices = ["ROCK", "PAPER", "SCISSORS"];
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function playerSelection() {
-    // get input
-    let playerInput = prompt("Please choose Rock, Paper or Scissors.");
-    // make uppercase
-    playerInput = playerInput.toUpperCase();
-    // check validity
-    if (playerInput === "ROCK" || playerInput === "PAPER" || playerInput === "SCISSORS") {
-        return playerInput;
-    } else {
-        alert("Oops, try again!");
-        return playerSelection();
-    }
+function processResult(result, computer, player) {
+    roundCounter++
+
+    displayPlayer.classList.remove('start', 'tie', 'win', 'loss');
+    displayPlayer.classList.add(`${result}`); // change styling
+    displayCPU.classList.remove('start', 'tie', 'win', 'loss');
+    displayCPU.classList.add(`${result}`); // change styling
+
+    const playHistoryListItem = document.createElement('li');
+
+    playHistoryListItem.innerHTML = `You picked: <b>${player}.</b> </br>Computer picked: <b>${computer}.</b></br><i>It's a ${result}!</i>`
+
+    playHistoryListItem.classList.add('playhistorylistitem', `${result}`);
+    playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
 }
 
 function playRound(computer, player) {
-
-    // determine result
-
     if (computer === player) {
-        roundCounter++
 
-        displayPlayer.classList.add('tie'); // change styling
-        displayPlayer.classList.remove('start', 'loss', 'win');
-
-        displayCPU.classList.add('tie'); // change styling
-        displayCPU.classList.remove('start', 'loss', 'win');
-
-        // playHistory.unshift([player, computer, score, "tie"]);
-
-        const playHistoryListItem = document.createElement('li');
-
-        playHistoryListItem.innerHTML = `You picked: <b>${player}.</b> </br>Computer picked: <b>${computer}.</b></br><i>It's a tie!</i>`
-
-        playHistoryListItem.classList.add('playhistorylistitem', 'tie');
-
-        playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
-
-        displayPlayer.textContent = `${player}`;
-        displayCPU.textContent = `${computer}`;
-
+        processResult('tie', `${computer}`, `${player}`);
 
     } else if (
-
         computer === "ROCK" && player === "SCISSORS" ||
         computer === "SCISSORS" && player === "PAPER" ||
         computer === "PAPER" && player === "ROCK"
     ) {
-        roundCounter++
-
-        displayPlayer.classList.add('loss'); // change styling
-        displayPlayer.classList.remove('start', 'tie', 'win');
-
-        displayCPU.classList.add('win'); // change styling
-        displayCPU.classList.remove('start', 'loss', 'tie');
-
-        const playHistoryListItem = document.createElement('li');
-
-        playHistoryListItem.innerHTML = `You picked: <b>${player}.</b> </br>Computer picked: <b>${computer}.</b></br><i>You lost the round!</i>`
-
-        playHistoryListItem.classList.add('playhistorylistitem', 'loss');
-
-        playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
-
-        // playHistory.unshift([player, computer, score, "loss"]);
-
-        score[1]++;
-
-        displayPlayer.textContent = `${player}`;
-        displayCPU.textContent = `${computer}`;
-
+        score[1]++
+        processResult('loss', `${computer}`, `${player}`);
 
     } else {
-        roundCounter++
-        displayPlayer.classList.add('win'); // change styling
-        displayPlayer.classList.remove('start', 'tie', 'loss');
-
-        displayCPU.classList.add('loss'); // change styling
-        displayCPU.classList.remove('start', 'tie', 'win');
-
-        const playHistoryListItem = document.createElement('li');
-
-        playHistoryListItem.innerHTML = `You picked: <b>${player}.</b> </br>Computer picked: <b>${computer}.</b></br><i>You won the round!</i>`
-
-        playHistoryListItem.classList.add('playhistorylistitem', 'win');
-
-        playHistoryList.insertBefore(playHistoryListItem, playHistoryList.firstChild);
-
-        // playHistory.unshift([player, computer, score, "win"]);
-
-        score[0]++;
-        displayPlayer.textContent = `${player}`;
-        displayCPU.textContent = `${computer}`;
-
-
+        score[0]++
+        processResult('win', computer, player);
     }
 }
 
-const againButtonContainer = document.querySelector('.againbuttoncontainer');
-
-
-
-
 function gameOver() {
-
-
-
-
     buttons.forEach((button) => {
         button.disabled = true;
-
-
-
     })
 
+    const restartButton = document.querySelector('.restartButton');
+    console.log(restartButton)
 
-    const restartButton = document.createElement('button')
-    restartButton.classList.add('button');
-    restartButton.textContent = 'Play again!';
-
-    againButtonContainer.appendChild(restartButton);
     restartButton.addEventListener('click', function () {
         location.reload();
     })
