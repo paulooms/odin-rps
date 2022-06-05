@@ -25,6 +25,8 @@ function processResult(result, computer, player) {
     displayPlayer.classList.add(`${result}`); // change styling
     displayCPU.classList.remove('start', 'tie', 'win', 'loss');
     displayCPU.classList.add(`${result}`); // change styling
+    displayPlayer.textContent = `${player}`;
+    displayCPU.textContent = `${computer}`;
 
     const playHistoryListItem = document.createElement('li');
 
@@ -87,7 +89,11 @@ buttons.forEach((button) => {
         scoreDiv.textContent = `${score[0]}-${score[1]}`;
 
         if (roundCounter >= 5) {
-            gameOver();
+
+            setTimeout(function () {
+                gameOver()
+            }, 1000);
+            // gameOver();
         }
     })
 })
