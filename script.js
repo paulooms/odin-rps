@@ -61,22 +61,25 @@ function gameOver() {
     })
 
     const restartButton = document.querySelector('.restartButton');
-    console.log(restartButton)
 
     restartButton.addEventListener('click', function () {
         location.reload();
     })
 
-    if (score[0] < score[1]) {
-        endParagraph.textContent = "You lost, bummer!";
-        popup.classList.add('loss', 'show');
-    } else if (score[0] > score[1]) {
-        endParagraph.textContent = "You won, awesome!"
-        popup.classList.add('win', 'show');
-    } else {
-        endParagraph.textContent = "It's a tie. Boring!"
-        popup.classList.add('tie', 'show');
-    }
+    setTimeout(function () {
+        if (score[0] < score[1]) {
+            endParagraph.textContent = "You lost, bummer!";
+            popup.classList.add('loss', 'show');
+        } else if (score[0] > score[1]) {
+            endParagraph.textContent = "You won, awesome!"
+            popup.classList.add('win', 'show');
+        } else {
+            endParagraph.textContent = "It's a tie. Boring!"
+            popup.classList.add('tie', 'show');
+        }
+    }, 1000);
+
+
 
 }
 
@@ -90,10 +93,7 @@ buttons.forEach((button) => {
 
         if (roundCounter >= 5) {
 
-            setTimeout(function () {
-                gameOver()
-            }, 1000);
-            // gameOver();
+            gameOver();
         }
     })
 })
